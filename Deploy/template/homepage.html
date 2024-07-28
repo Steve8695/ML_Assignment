@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Churn Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+h1 {
+	font-family: 'Dancing Script', cursive;
+	font-size: 40px;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+
+input[type=text], .custom-select {
+width:100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+form, table{
+width:100%;
+}
+
+input[type=submit] {
+  background-color: #FB0000;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 230px;
+
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+
+}
+
+.container {
+  border-radius: 5px;
+  background-color: black;
+  padding: 20px;
+  display: flex;
+}
+
+.form_wrapper {
+  flex:1;
+  text-align: center;
+}
+label{
+color:white;
+}
+
+.col-label{
+width:25%;
+}
+
+
+
+</style>
+</head>
+<body>
+<h1> Customer Churn Predictor Project </h1>
+<div class="container">
+  <form action="/send", name="send_data", method="post">
+      <table>
+
+<tr>
+    <td  class="col-label">  <label>CR_PROD_CNT_IL</label></td>
+       <td  class="col-input">  <input type="text" name="CR_PROD_CNT_IL" placeholder="Tenure"></td></tr>
+<tr>
+    <td  class="col-label">  <label>AMOUNT_RUB_CLO_PRC</label></td>
+        <td  class="col-input">  <input type="text" name="AMOUNT_RUB_CLO_PRC" placeholder="Tenure"></td></tr>
+<tr>
+    <td  class="col-label">  <label>PRC_ACCEPTS_A_EMAIL_LINK</label></td>
+       <td  class="col-input">  <input type="text" name="PRC_ACCEPTS_A_EMAIL_LINK" placeholder="MonthlyCharges"></td></tr>
+
+<tr>
+    <td  class="col-label">  <label>APP_REGISTR_RGN_CODE</label></td>
+       <td  class="col-input">  <input type="text" name="APP_REGISTR_RGN_CODE" placeholder="TotalCharges"></td></tr>
+<tr>
+    <td  class="col-label">  <label>PRC_ACCEPTS_A_POS</label></td>
+        <td  class="col-input">  <input type="text" name="PRC_ACCEPTS_A_POS" placeholder="TotalCharges"></td></tr>
+<tr>
+    <td  class="col-label">  <label>PRC_ACCEPTS_A_TK</label></td>
+        <td  class="col-input">  <input type="text" name="PRC_ACCEPTS_A_TK" placeholder="TotalCharges"></td></tr>
+<tr>
+    <td  class="col-label">  <label>TURNOVER_DYNAMIC_IL_1M</label></td>
+        <td  class="col-input">  <input type="text" name="TURNOVER_DYNAMIC_IL_1M" placeholder="TotalCharges"></td></tr>
+<tr>
+    <td  class="col-label">  <label>CNT_TRAN_AUT_TENDENCY1M</label></td>
+        <td  class="col-input">  <input type="text" name="CNT_TRAN_AUT_TENDENCY1M" placeholder="TotalCharges"></td></tr>
+<tr>
+    <td  class="col-label">  <label>SUM_TRAN_AUT_TENDENCY1M</label></td>
+        <td  class="col-input">  <input type="text" name="SUM_TRAN_AUT_TENDENCY1M" placeholder="TotalCharges"></td></tr>
+
+<tr>
+    <td class="col-label">
+        <label for="AMOUNT_RUB_SUP_PRC">AMOUNT_RUB_SUP_PRC</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="AMOUNT_RUB_SUP_PRC" name="AMOUNT_RUB_SUP_PRC" placeholder="Amount in RUB">
+    </td>
+</tr>
+<!-- Row 2 -->
+<tr>
+    <td class="col-label">
+        <label for="PRC_ACCEPTS_A_AMOBILE">PRC_ACCEPTS_A_AMOBILE</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="PRC_ACCEPTS_A_AMOBILE" name="PRC_ACCEPTS_A_AMOBILE" placeholder="Accepts A AMobile">
+    </td>
+</tr>
+<!-- Row 3 -->
+<tr>
+    <td class="col-label">
+        <label for="SUM_TRAN_AUT_TENDENCY3M">SUM_TRAN_AUT_TENDENCY3M</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="SUM_TRAN_AUT_TENDENCY3M" name="SUM_TRAN_AUT_TENDENCY3M" placeholder="Total Transactions (3M)">
+    </td>
+</tr>
+<!-- Row 4 -->
+<tr>
+    <td class="col-label">
+        <label for="CLNT_TRUST_RELATION">CLNT_TRUST_RELATION</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="CLNT_TRUST_RELATION" name="CLNT_TRUST_RELATION" placeholder="Client Trust Relation">
+    </td>
+</tr>
+<!-- Row 5 -->
+<tr>
+    <td class="col-label">
+        <label for="PRC_ACCEPTS_TK">PRC_ACCEPTS_TK</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="PRC_ACCEPTS_TK" name="PRC_ACCEPTS_TK" placeholder="Accepts TK">
+    </td>
+</tr>
+<!-- Row 6 -->
+<tr>
+    <td class="col-label">
+        <label for="PRC_ACCEPTS_A_MTP">PRC_ACCEPTS_A_MTP</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="PRC_ACCEPTS_A_MTP" name="PRC_ACCEPTS_A_MTP" placeholder="Accepts A MTP">
+    </td>
+</tr>
+<!-- Row 7 -->
+<tr>
+    <td class="col-label">
+        <label for="REST_DYNAMIC_FDEP_1M">REST_DYNAMIC_FDEP_1M</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="REST_DYNAMIC_FDEP_1M" name="REST_DYNAMIC_FDEP_1M" placeholder="Dynamic FDEP Rest (1M)">
+    </td>
+</tr>
+<!-- Row 8 -->
+<tr>
+    <td class="col-label">
+        <label for="CNT_TRAN_AUT_TENDENCY3M">CNT_TRAN_AUT_TENDENCY3M</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="CNT_TRAN_AUT_TENDENCY3M" name="CNT_TRAN_AUT_TENDENCY3M" placeholder="Count Transactions (3M)">
+    </td>
+</tr>
+</tbody>
+</table>
+                            
+
+
+<tr>
+    <td class="col-label">
+        <label for="CNT_TRAN_AUT_TENDENCY3M">CNT_TRAN_AUT_TENDENCY3M</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="CNT_TRAN_AUT_TENDENCY3M" name="CNT_TRAN_AUT_TENDENCY3M" placeholder="Count Transactions (3M)">
+    </td>
+</tr>
+<!-- Row 2 -->
+<tr>
+    <td class="col-label">
+        <label for="CNT_ACCEPTS_TK">CNT_ACCEPTS_TK</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="CNT_ACCEPTS_TK" name="CNT_ACCEPTS_TK" placeholder="Count Accepts TK">
+    </td>
+</tr>
+<!-- Row 3 -->
+<tr>
+    <td class="col-label">
+        <label for="APP_MARITAL_STATUS">APP_MARITAL_STATUS</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="APP_MARITAL_STATUS" name="APP_MARITAL_STATUS" placeholder="Marital Status">
+    </td>
+</tr>
+<!-- Row 4 -->
+<tr>
+    <td class="col-label">
+        <label for="REST_DYNAMIC_SAVE_3M">REST_DYNAMIC_SAVE_3M</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="REST_DYNAMIC_SAVE_3M" name="REST_DYNAMIC_SAVE_3M" placeholder="Dynamic Save Rest (3M)">
+    </td>
+</tr>
+<!-- Row 5 -->
+<tr>
+    <td class="col-label">
+        <label for="CR_PROD_CNT_VCU">CR_PROD_CNT_VCU</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="CR_PROD_CNT_VCU" name="CR_PROD_CNT_VCU" placeholder="Product Count VCU">
+    </td>
+</tr>
+<!-- Row 6 -->
+<tr>
+    <td class="col-label">
+        <label for="REST_AVG_CUR">REST_AVG_CUR</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="REST_AVG_CUR" name="REST_AVG_CUR" placeholder="Average Currency Rest">
+    </td>
+</tr>
+<!-- Row 7 -->
+<tr>
+    <td class="col-label">
+        <label for="CNT_TRAN_MED_TENDENCY1M">CNT_TRAN_MED_TENDENCY1M</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="CNT_TRAN_MED_TENDENCY1M" name="CNT_TRAN_MED_TENDENCY1M" placeholder="Count Transactions Median (1M)">
+    </td>
+</tr>
+<!-- Row 8 -->
+<tr>
+    <td class="col-label">
+        <label for="APP_KIND_OF_PROP_HABITATION">APP_KIND_OF_PROP_HABITATION</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="APP_KIND_OF_PROP_HABITATION" name="APP_KIND_OF_PROP_HABITATION" placeholder="Kind of Property Habitation">
+    </td>
+</tr>
+<!-- Row 9 -->
+<tr>
+    <td class="col-label">
+        <label for="CLNT_JOB_POSITION_TYPE">CLNT_JOB_POSITION_TYPE</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="CLNT_JOB_POSITION_TYPE" name="CLNT_JOB_POSITION_TYPE" placeholder="Job Position Type">
+    </td>
+</tr>
+<!-- Row 10 -->
+<tr>
+    <td class="col-label">
+        <label for="AMOUNT_RUB_NAS_PRC">AMOUNT_RUB_NAS_PRC</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="AMOUNT_RUB_NAS_PRC" name="AMOUNT_RUB_NAS_PRC" placeholder="Amount in RUB NAS">
+    </td>
+</tr>
+                                    <!-- Row 11 -->
+<tr>
+    <td class="col-label">
+        <label for="CLNT_JOB_POSITION">CLNT_JOB_POSITION</label>
+    </td>
+    <td class="col-input">
+        <input type="text" id="CLNT_JOB_POSITION" name="CLNT_JOB_POSITION" placeholder="Client Job Position">
+
+                            
+
+
+<tr>
+    <td class="col-label"><label></label></td>
+   <td  class="col-input">
+        <select class="custom-select" name="gender">
+            <option value='gender_Male'>Male</option>
+            <option value='gender_Female'>Female</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>Senior-Citizen</label></td>
+      <td  class="col-input">
+        <select class="custom-select" name="SeniorCitizen">
+            <option value="SeniorCitizen_1">Yes</option>
+            <option value="SeniorCitizen_0">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>Partner</label></td>
+     <td  class="col-input">
+        <select class="custom-select" name="Partner">
+            <option value="Partner_Yes">Yes</option>
+            <option value="Partner_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>Dependents</label></td>
+     <td  class="col-input">
+        <select class="custom-select" name="Dependents">
+            <option value="Dependents_Yes">Yes</option>
+            <option value="Dependents_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>PhoneService</label></td>
+      <td  class="col-input">
+        <select class="custom-select" name="PhoneService">
+            <option value="PhoneService_Yes">Yes</option>
+            <option value="PhoneService_No">No</option>
+        </select></td></tr>
+
+
+
+<tr>
+     <td  class="col-label"> <label>MultipleLines</label></td>
+        <td  class="col-input">
+        <select class="custom-select" name="MultipleLines">
+            <option value="MultipleLines_Yes">Yes</option>
+            <option value="MultipleLines_No">No</option>
+            <option value="MultipleLines_No phone service">No phone service</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>InternetService</label></td>
+       <td  class="col-input">
+        <select class="custom-select" name="InternetService">
+            <option value="InternetService_Fiber optic">Fiber optic</option>
+            <option value="InternetService_DSL">DSL</option>
+            <option value="InternetService_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>OnlineSecurity</label></td>
+        <td  class="col-input">
+        <select class="custom-select" name="OnlineSecurity">
+            <option value="OnlineSecurity_No internet service">No internet service</option>
+            <option value="OnlineSecurity_Yes">Yes</option>
+            <option value="OnlineSecurity_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>OnlineBackup</label></td>
+        <td  class="col-input">
+        <select class="custom-select" name="OnlineBackup">
+            <option value="OnlineBackup_No internet service">No internet service</option>
+            <option value="OnlineBackup_Yes">Yes</option>
+            <option value="OnlineBackup_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>DeviceProtection</label></td>
+        <td  class="col-input">
+        <select class="custom-select" name="DeviceProtection">
+            <option value="DeviceProtection_No">No internet service</option>
+            <option value="Yes">DeviceProtection_Yes</option>
+            <option value="DeviceProtection_No internet service">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>TechSupport</label></td>
+       <td  class="col-input">
+        <select class="custom-select" name="TechSupport">
+            <option value="TechSupport_No internet service">No internet service</option>
+            <option value="TechSupport_Yes">Yes</option>
+            <option value="TechSupport_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>StreamingTV</label></td>
+       <td  class="col-input">
+        <select class="custom-select" name="StreamingTV">
+            <option value="StreamingTV_No internet service">No Internet service</option>
+            <option value="StreamingTV_Yes">Yes</option>
+            <option value="StreamingTV_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>StreamingMovies</label></td>
+        <td  class="col-input">
+        <select class="custom-select" name="StreamingMovies">
+            <option value="StreamingMovies_No internet service">No Internet service</option>
+            <option value="StreamingMovies_Yes">Yes</option>
+            <option value="StreamingMovies_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>Contract</label></td>
+       <td  class="col-input">
+        <select class="custom-select" name="Contract">
+            <option value="Contract_Month-to-month">Month-to-month</option>
+            <option value="Contract_Two year">Two year</option>
+            <option value="Contract_One year">One year</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>PaperlessBilling</label></td>
+        <td  class="col-input">
+        <select class="custom-select" name="PaperlessBilling">
+            <option value="PaperlessBilling_Yes">Yes</option>
+            <option value="PaperlessBilling_No">No</option>
+        </select></td></tr>
+
+<tr>
+     <td  class="col-label"> <label>PaymentMethod</label></td>
+      <td  class="col-input">
+        <select class="custom-select" name="PaymentMethod">
+            <option value="PaymentMethod_Electronic check">Electronic check</option>
+            <option value="PaymentMethod_Mailed check">Mailed check</option>
+            <option value="PaymentMethod_Bank transfer (automatic)">Bank transfer (automatic)</option>
+            <option value="PaymentMethod_Credit card (automatic)">Credit card (automatic)</option>
+        </select></td></tr>
+
+    <tr class="form_wrapper">
+     <td colspan='2'> <input type="submit" value="PREDICT CHURNER "/></td>
+    </tr>
+</table>
+  </form>
+
+
+</div>
+</body>
+</html>
